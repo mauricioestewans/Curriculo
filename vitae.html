@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imagens\favicon.ico">
+    <title>Maurício Estewans - Profissional em Segurança Cibernética</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#2563eb',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-3d {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+        }
+        .card-3d:hover {
+            transform: translateY(-10px);
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #1e293b;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            border-radius: 3px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 21px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: #3b82f6;
+        }
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        /* Carousel Styling */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+            transition: opacity 0.5s ease;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .carousel-control-prev {
+            left: 10px;
+        }
+        .carousel-control-next {
+            right: 10px;
+        }
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: #3b82f6;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm px-4 py-3 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl font-semibold"></a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-primary transition">Sobre</a>
+                <a href="#experience" class="text-gray-600 hover:text-primary transition">Experiência</a>
+                <a href="#skills" class="text-gray-600 hover:text-primary transition">Habilidades</a>
+                <a href="#education" class="text-gray-600 hover:text-primary transition">Formação</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <div class="inline-block px-3 py-1 rounded-full bg-white text-gray-600 shadow-sm mb-4 animate-fade-in">
+                    <span class="flex items-center">
+                        <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                        Especialista em Segurança Cibernética 
+                    </span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+                    Olá, eu sou <span class="gradient-text">Maurício Estewans</span>
+                </h1>
+                <p class="text-gray-600 text-xl mb-8 animate-fade-in">
+                    Profissional especializado em segurança cibernética, com expertise em análise de vulnerabilidades, forense digital e governança de TI.
+                </p>
+                <a href="#contact" class="inline-block bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-secondary transition animate-fade-in">
+                    Entre em Contato
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                        <div class="w-full h-full bg-gray-300 flex items-center justify-center">
+                            <img src="imagens\Imagem do WhatsApp de 2025-05-22 à(s) 15.49.04_ef9fffa6.jpg"></img>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 -right-5 bg-white p-3 rounded-full shadow-lg">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-shield-alt text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-gray-100 shadow-lg">
+                        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                            <img src="imagens\Imagem do WhatsApp de 2025-05-22 à(s) 15.49.03_9d870551.jpg"></img>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold mb-6 reveal">
+                        Sobre <span class="gradient-text">Mim</span>
+                    </h2>
+                    <p class="text-gray-600 mb-6 reveal">
+                        Sou Maurício Estewans, um profissional apaixonado por tecnologia e segurança cibernética, com uma trajetória consolidada em farmácias e transição para a área de TI. Minha formação em Análise e Desenvolvimento de Sistemas, complementada por uma pós-graduação em Segurança Cibernética, me proporcionou uma base sólida para atuar em projetos de governança de dados, auditoria de TI e proteção de sistemas.
+                        <br><br>
+                        Tenho experiência prática com ferramentas como Kali Linux, Metasploit, Nessus, Wireshark, autopsy e frameworks como COBIT e ITIL 4, além de conhecimento em normas ISO 27000 e LGPD. Minha abordagem de trabalho combina análise estratégica, resolução de problemas e metodologias ágeis (Scrum e Kanban), garantindo soluções seguras e eficientes.
+                        <br><br>
+                        Meus valores profissionais incluem comprometimento com a excelência, aprendizado contínuo e colaboração em equipe, sempre buscando entregar resultados que agreguem valor às organizações.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+16</div>
+                            <div class="text-gray-600">Anos de Experiência</div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+17</div>
+                            <div class="text-gray-600">Projetos Concluídos</div>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+10</div>
+                            <div class="text-gray-600">Certificações</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Minha <span class="gradient-text">Experiência</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-briefcase text-primary mr-3"></i>
+                        Experiência Profissional
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Auxiliar de Farmácia</h4>
+                            <div class="text-primary font-medium mb-2">Hospital Santa Catarina de Blumenau | 12/2022 - 12/2024</div>
+                            <p class="text-gray-600">
+                                Atuei na gestão de medicamentos e insumos hospitalares, garantindo precisão no controle de estoque e atendimento às normas regulatórias, montagem e conferência de contas cirúrgicas.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Promotor de Merchandising</h4>
+                            <div class="text-primary font-medium mb-2">Dinâmica Merchandising | 01/2022 - 02/2023</div>
+                            <p class="text-gray-600">
+                                Responsável por estratégias de exposição de produtos, aumentando a visibilidade e vendas em pontos estratégicos.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Encarregado</h4>
+                            <div class="text-primary font-medium mb-2">Farmácias São João | 01/2022 - 12/2022</div>
+                            <p class="text-gray-600">
+                                Liderei equipes na organização de processos operacionais, otimizando o atendimento ao cliente e a gestão de estoque.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Balconista</h4>
+                            <div class="text-primary font-medium mb-2">Clamed Farmácias | 11/2020 - 11/2021</div>
+                            <p class="text-gray-600">
+                                Atuei no atendimento ao cliente e na dispensação de medicamentos, garantindo conformidade com normas farmacêuticas.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Encarregado</h4>
+                            <div class="text-primary font-medium mb-2">Multifarma | 10/2018 - 10/2020</div>
+                            <p class="text-gray-600">
+                                Gerenciei operações de farmácia, implementando melhorias.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Sub-Gerente</h4>
+                            <div class="text-primary font-medium mb-2">Drogarias Big Ben | 02/2009 - 02/2017</div>
+                            <p class="text-gray-600">
+                                Coordenava equipes e processos, contribuindo para o alcance de metas de vendas e satisfação do cliente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+               <!-- <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-trophy text-primary mr-3"></i>
+                        Realizações & Competências
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Transição para Segurança Cibernética</h4>
+                            <div class="text-primary font-medium mb-2">2024</div>
+                            <p class="text-gray-600">
+                                Concluí pós-graduação em Segurança Cibernética, aplicando conhecimentos em projetos práticos de forense digital e análise de vulnerabilidades.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Certificação em AWS Security</h4>
+                            <div class="text-primary font-medium mb-2">2023</div>
+                            <p class="text-gray-600">
+                                Obtive certificação em AWS Security, comprovando expertise em segurança na nuvem e gestão de infraestrutura segura.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Projeto de Gestão de Vulnerabilidades</h4>
+                            <div class="text-primary font-medium mb-2">2023</div>
+                            <p class="text-gray-600">
+                                Liderei projeto de análise de vulnerabilidades usando Nessus e OpenVAS, reduzindo riscos em 30% em ambiente simulado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Minhas <span class="gradient-text">Habilidades</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-code text-primary mr-3"></i>
+                        Habilidades Técnicas
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Python</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">JavaScript</span>
+                                <span class="text-primary font-bold">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Kali Linux</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Metodologias ágeis</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">SQL/MySQL</span>
+                                <span class="text-primary font-bold">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-users text-primary mr-3"></i>
+                        Habilidades Interpessoais
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Liderança</span>
+                                <span class="text-primary font-bold">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Comunicação</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Trabalho em Equipe</span>
+                                <span class="text-primary font-bold">88%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Resolução de Problemas</span>
+                                <span class="text-primary font-bold">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Gestão de Tempo</span>
+                                <span class="text-primary font-bold">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 reveal">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-tools text-primary mr-3"></i>
+                    Ferramentas & Tecnologias
+                </h3>
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        Metasploit
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        Nessus
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        Burp Buit
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                       Autopsy 
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        OpenVAS
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        Wireshark
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        AWS
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        OWASP
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Formação <span class="gradient-text">Acadêmica</span>
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                        Educação Formal
+                    </h3>
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Pós-graduação em Segurança Cibernética</h4>
+                            <div class="text-primary font-medium mb-2">XPeducação | 2024</div>
+                            <p class="text-gray-600">
+                                Desenvolvimento de competências de segurança, análise de malwares, forense digital, gestão de incidentes, LGPD e normas ISO 27001.
+                            </p>
+                        </div>
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Análise e Desenvolvimento de Sistemas</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Formação em JavaScript, HTML5, CSS, SQL/MySQL, análise de sistemas, gestão de dados e operações de infraestrutura.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-certificate text-primary mr-3"></i>
+                        Cursos & Certificações
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Comunicação Assertiva e Negociação</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Desenvolvimento de habilidades de comunicação eficaz e estratégias de negociação em projetos de TI.
+                            </p>
+                        </div>                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">
+                                Gestão de metas indicadores e perfomance</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Gestão estrategicas de segurança da informação,
+liderança em projetos de tranformação digital segura, analise de perfomance em segurança cibernética, gestão e compliance e governaça de TI.                             </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Gestão de projetos</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Gestão de projetos de segurança cibernética, gerenciamento de projetos de conformidade, PMI/PMP com foco em segurança da informação, devsecops e integração continua, projeto de tranformação digital segura.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Liderança e desenvolvimento de equipes</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Liderança em equipes de sec, gestão SOC, liderança técnica em ambientes regulados, desenvolvimento de competências de segurança, liderança consultiva e influência sem autoridade.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Modelos de gestão</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Governança em segurança da informação, gestão de riscos cibernéticos, modelos de maturidade, gestão de compliance em ambientes regulados.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Novos desenvolvimento em IOT</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Segurança de dispositivos médicos, segurança da cadeia de suprimentos, arquiteturas seguras para IOT, analise de dados IOT para segurança, soluções seguras em IOT. 
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Introdução à linguagem Python</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                               Python para segurança cibernética, desenvolvimento de ferramentas de segurança, desenvolvimento web seguro com Python.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Introdução à análise de dados com Python</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Análise de dados de segurança, ciência de dados aplicada a segurança, business intelligence para segurança. 
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Rede de computadores e IOT</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Segurança de redes, arquitetura segura para ecossistemas IOT, monitoramento e análise de dados, segurança e comunicações IOT, sitemas de automações.                          </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Sensores microcontroladores e programação em IOT</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Segurança de dispositivos embarcados, desenvolvimento para plataformas IOT, sensores inteligentes, arquitetura de referência para IOT segura.
+                            </p>
+                        </div>
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">Estrutura de dados em Python</h4>
+                            <div class="text-primary font-medium mb-2">Unopar | 2023</div>
+                            <p class="text-gray-600">
+                                Estrutura de dados para análise de segurança, estrutura de dados avançada, algoritimos e estruturas para processamento, otimização de códigos para ferramentas de segurança.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Sessão Contribuições -->
+    <section id="contribuicoes" class="py-20 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center reveal">
+            <span class="gradient-text">Contribuições</span>
+        </h2>
+        <p class="text-gray-600 text-center mb-10 reveal">
+            Acesse artigos, projetos, publicações e outras contribuições relevantes para a comunidade de tecnologia e segurança cibernética.
+        </p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="https://github.com/mauricioestewans" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fab fa-github text-2xl"></i>
+                <span class="font-medium">GitHub</span>
+            </a>
+            <a href="https://linkedin.com/in/mauricioestewans" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fab fa-linkedin-in text-2xl"></i>
+                <span class="font-medium">LinkedIn</span>
+            </a>
+            <a href="https://www.terra.com.br/byte/seguranca-digital/conheca-os-golpes-digitais-mais-comuns-contra-idosos-e-saiba-como-se-proteger,57c88cf935efe68d335f41d0dcc1d8d922qsdd11.html" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal Terra</span>
+            </a>
+            <a href="https://www.terra.com.br/byte/mulher-perde-r-20-mil-em-golpe-de-namoro-online-saiba-como-se-proteger,8d01ea9d0ec27a2e3f861617ef76670atsejv61m.html" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal Terra</span>
+            </a>
+            <a href="https://www.em.com.br/emfoco/2025/05/07/como-identificar-golpes-e-melhorar-a-seguranca-de-idosos-na-era-digital/" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal E.M FOCO</span>
+            </a>
+            <a href="https://cidadaoconsumidor.com.br/o-que-muda-com-a-nova-lei-de-ia-na-seguranca-digital-do-consumidor/" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal Cidadão Consumidor</span>
+            </a>
+            <a href="https://www.em.com.br/emfoco/2025/05/15/muita-atencao-ao-golpe-do-namoro-online-aprenda-a-identificar-sinais-de-fraude/" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal E.M FOCO</span>
+            </a>
+            <a href="https://revistaanamaria.com.br/dinheiro/idosos-golpes-digitais-como-se-proteger/" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Revista Ana Maria</span>
+            </a><a href="https://idososcomdignidade.com.br/2025/04/22/golpes/golpes-virtuais-idosos/" target="_blank" class="bg-gray-100 px-6 py-4 rounded-lg shadow-sm flex items-center space-x-3 hover:bg-primary hover:text-white transition reveal">
+                <i class="fas fa-file-alt text-2xl"></i>
+                <span class="font-medium">Portal Terra</span>
+            </a>
+            <!-- Adicione mais links conforme necessário -->
+        </div>
+    </div>
+    </section>
+    <!-- Portfolio Section -->
+    <!-- <section id="portfolio" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center reveal">
+                Meu <span class="gradient-text">Portfólio</span>
+            </h2>
+            <p class="text-gray-600 text-center mb-16 max-w-2xl mx-auto reveal">
+                Projetos que demonstram minha expertise em segurança cibernética e desenvolvimento.
+            </p>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <div class="bg-gray-50 rounded-xl overflow-hidden card-3d">
+                            <div class="h-48 bg-gray-200 relative overflow-hidden">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-6xl text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Análise de Vulnerabilidades</h3>
+                                <p class="text-gray-600 mb-4">Projeto de avaliação de segurança usando Nessus e OpenVAS, reduzindo riscos em 30%.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Nessus</span>
+                                    <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">OpenVAS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="bg-gray-50 rounded-xl overflow-hidden card-3d">
+                            <div class="h-48 bg-gray-200 relative overflow-hidden">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fas fa-code text-6xl text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2">Script de Automação em Python</h3>
+                                <p class="text-gray-600 mb-4">Desenvolvimento de script para monitoramento de redes, otimizando a detecção de ameaças.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Python</span>
+                                    <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">Wireshark</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-control-prev">❮</div>
+                <div class="carousel-control-next">❯</div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Depoimentos de <span class="gradient-text">Colegas</span>
+            </h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <div class="bg-white rounded-xl p-6 shadow-sm">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">João Silva</h4>
+                                    <p class="text-gray-600 text-sm">Gerente de TI, Empresa XYZ</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"Maurício demonstrou grande competência em segurança cibernética, implementando soluções robustas para nossa infraestrutura."</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="bg-white rounded-xl p-6 shadow-sm">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Ana Costa</h4>
+                                    <p class="text-gray-600 text-sm">Analista de Segurança, Empresa ABC</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic">"A habilidade de Maurício em análise de vulnerabilidades foi crucial para o sucesso de nosso projeto de compliance."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-control-prev">❮</div>
+                <div class="carousel-control-next">❯</div>
+            </div>
+        </div>
+    </section> -- >
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-primary text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <h2 class="text-4xl font-bold mb-6">
+                        Vamos <span class="text-indigo-200">Conversar</span>
+                    </h2>
+                    <p class="text-blue-100 text-xl mb-8">
+                        Estou disponível para projetos em segurança cibernética, consultoria em LGPD ou desenvolvimento de soluções em TI.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <a href="mailto:mauricioestewans@hotmail.com" class="text-blue-100 hover:text-white">mauricioestewans@hotmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Telefone</h4>
+                                <a href="tel:+5547988891448" class="text-blue-100 hover:text-white">+55 (47) 98889-1448</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Endereço</h4>
+                                <p class="text-blue-100">Rua Itajaí, 642, Blumenau, Santa Catarina</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">LinkedIn</h4>
+                                <a href="https://linkedin.com/in/mauricioestewans" target="_blank" class="text-blue-100 hover:text-white">linkedin.com/in/mauricioestewans</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="bg-white p-8 rounded-xl text-gray-800">
+                        <h3 class="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Assunto</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-secondary transition">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-xl font-semibold text-white">Maurício Estewans</a>
+                    <p class="mt-2">Profissional em Segurança Cibernética</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://linkedin.com/in/mauricioestewans" class="hover:text-white transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://github.com/mauricioestewans" class="hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p>© 2025 Maurício Estewans. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll reveal
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Hamburger menu
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Carousel functionality
+        const carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(carousel => {
+            const inner = carousel.querySelector('.carousel-inner');
+            const items = carousel.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
+
+            carousel.querySelector('.carousel-control-next').addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            });
+
+            carousel.querySelector('.carousel-control-prev').addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            });
+        });
+
+        // Form validation
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                alert('Mensagem enviada com sucesso!');
+                document.getElementById('contact-form').reset();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
+</body>
+</html>
