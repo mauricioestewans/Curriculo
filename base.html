@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <title>Seu Nome - Profissional em [Sua Área]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#2563eb',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .card-3d {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background-color: #1e293b;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 21px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: #3b82f6;
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm px-4 py-3 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl font-semibold">Seu Nome</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-primary transition">Sobre</a>
+                <a href="#experience" class="text-gray-600 hover:text-primary transition">Experiência</a>
+                <a href="#skills" class="text-gray-600 hover:text-primary transition">Habilidades</a>
+                <a href="#education" class="text-gray-600 hover:text-primary transition">Formação</a>
+                <a href="#portfolio" class="text-gray-600 hover:text-primary transition">Portfólio</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary transition">Contato</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <a href="#contact" class="bg-primary text-white px-4 py-2 rounded-full font-medium hover:bg-secondary transition flex items-center">
+                    Contato
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <div class="inline-block px-3 py-1 rounded-full bg-white text-gray-600 shadow-sm mb-4 animate-fade-in">
+                    <span class="flex items-center">
+                        <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+                        [Sua Área de Atuação] | [Seu Diferencial]
+                    </span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+                    Olá, eu sou <span class="gradient-text">Seu Nome</span>
+                </h1>
+                
+                <p class="text-gray-600 text-xl mb-8 animate-fade-in">
+                    [Breve descrição profissional - 1-2 frases que resumam seu valor profissional]
+                </p>
+                
+                <div class="flex space-x-4 animate-fade-in">
+                    <a href="#contact" class="bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-secondary transition">
+                        Contrate-me
+                    </a>
+                    <a href="#portfolio" class="px-6 py-3 rounded-full font-medium border border-gray-300 hover:border-primary transition">
+                        Ver Portfólio
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                        <!-- Substitua pela sua foto profissional -->
+                        <div class="w-full h-full bg-gray-300 flex items-center justify-center">
+                            <i class="fas fa-user text-6xl text-gray-500"></i>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-5 -right-5 bg-white p-3 rounded-full shadow-lg">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-trophy text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <div class="w-64 h-64 rounded-full overflow-hidden border-4 border-gray-100 shadow-lg">
+                        <!-- Outra foto sua ou ilustração -->
+                        <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                            <i class="fas fa-user-tie text-5xl text-gray-500"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold mb-6 reveal">
+                        Sobre <span class="gradient-text">Mim</span>
+                    </h2>
+                    
+                    <p class="text-gray-600 mb-6 reveal">
+                        [Texto mais detalhado sobre você - 3-4 parágrafos que destacam:
+                        <br><br>
+                        1. Sua trajetória profissional<br>
+                        2. Seus principais diferenciais<br>
+                        3. Sua abordagem de trabalho<br>
+                        4. Seus valores profissionais]
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+5</div>
+                            <div class="text-gray-600">Anos de Experiência</div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+20</div>
+                            <div class="text-gray-600">Projetos Concluídos</div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">100%</div>
+                            <div class="text-gray-600">Clientes Satisfeitos</div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg text-center reveal">
+                            <div class="text-3xl font-bold text-primary mb-2">+10</div>
+                            <div class="text-gray-600">Certificações</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Minha <span class="gradient-text">Experiência</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Experiência Profissional -->
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-briefcase text-primary mr-3"></i>
+                        Experiência Profissional
+                    </h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Cargo Atual</h4>
+                            <div class="text-primary font-medium mb-2">Empresa Atual | 2021 - Presente</div>
+                            <p class="text-gray-600">
+                                [Descrição detalhada das suas responsabilidades e conquistas. Use números e resultados quando possível]
+                            </p>
+                            <ul class="mt-2 list-disc list-inside text-gray-600">
+                                <li>Realizei [ação] que resultou em [resultado quantificável]</li>
+                                <li>Liderei [projeto/equipe] alcançando [resultado]</li>
+                                <li>Implementei [solução] que melhorou [métrica] em X%</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Cargo Anterior</h4>
+                            <div class="text-primary font-medium mb-2">Empresa Anterior | 2018 - 2021</div>
+                            <p class="text-gray-600">
+                                [Descrição detalhada das suas responsabilidades e conquistas]
+                            </p>
+                            <ul class="mt-2 list-disc list-inside text-gray-600">
+                                <li>Desenvolvi [solução] que otimizou [processo]</li>
+                                <li>Colaborei com [área] para alcançar [objetivo]</li>
+                                <li>Fui reconhecido por [conquista]</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">Primeiro Cargo Relevante</h4>
+                            <div class="text-primary font-medium mb-2">Primeira Empresa | 2016 - 2018</div>
+                            <p class="text-gray-600">
+                                [Descrição do seu primeiro cargo relevante na área]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Realizações e Prêmios -->
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-trophy text-primary mr-3"></i>
+                        Realizações & Prêmios
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold mb-2">Prêmio de Excelência Profissional</h4>
+                            <div class="text-primary font-medium mb-2">2022</div>
+                            <p class="text-gray-600">
+                                Reconhecido como [título] pelo [órgão/empresa] devido a [razão específica].
+                            </p>
+                        </div>
+                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold mb-2">Certificação em [Área Específica]</h4>
+                            <div class="text-primary font-medium mb-2">2021</div>
+                            <p class="text-gray-600">
+                                Certificado pela [instituição renomada] em [nome do curso/certificação], comprovando expertise em [habilidades específicas].
+                            </p>
+                        </div>
+                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold mb-2">Projeto Destaque</h4>
+                            <div class="text-primary font-medium mb-2">2020</div>
+                            <p class="text-gray-600">
+                                Liderança no projeto [nome] que resultou em [benefício quantificável] para a empresa/organização.
+                            </p>
+                        </div>
+                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold mb-2">Publicações/Artigos</h4>
+                            <div class="text-primary font-medium mb-2">2019</div>
+                            <p class="text-gray-600">
+                                Autor do artigo "[Título]" publicado em [veículo reconhecido], abordando [tema relevante para a área].
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Minhas <span class="gradient-text">Habilidades</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Habilidades Técnicas -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-code text-primary mr-3"></i>
+                        Habilidades Técnicas
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">[Habilidade Principal 1]</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">[Habilidade Principal 2]</span>
+                                <span class="text-primary font-bold">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">[Habilidade Principal 3]</span>
+                                <span class="text-primary font-bold">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">[Habilidade Secundária 1]</span>
+                                <span class="text-primary font-bold">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">[Habilidade Secundária 2]</span>
+                                <span class="text-primary font-bold">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Habilidades Interpessoais -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-users text-primary mr-3"></i>
+                        Habilidades Interpessoais
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Liderança</span>
+                                <span class="text-primary font-bold">95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Comunicação</span>
+                                <span class="text-primary font-bold">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Trabalho em Equipe</span>
+                                <span class="text-primary font-bold">88%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Resolução de Problemas</span>
+                                <span class="text-primary font-bold">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium">Gestão de Tempo</span>
+                                <span class="text-primary font-bold">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ferramentas e Tecnologias -->
+            <div class="mt-16 reveal">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-tools text-primary mr-3"></i>
+                    Ferramentas & Tecnologias
+                </h3>
+                
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 1]
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 2]
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 3]
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 4]
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 5]
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-full flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded-full mr-2 flex items-center justify-center text-white">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        [Ferramenta 6]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Formação <span class="gradient-text">Acadêmica</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Educação Formal -->
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                        Educação Formal
+                    </h3>
+                    
+                    <div class="timeline">
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">[Graduação/Pós-graduação mais recente]</h4>
+                            <div class="text-primary font-medium mb-2">[Nome da Instituição] | [Ano de Conclusão]</div>
+                            <p class="text-gray-600">
+                                [Detalhes relevantes: tese, projetos, conquistas, média se for relevante]
+                            </p>
+                        </div>
+                        
+                        <div class="timeline-item reveal">
+                            <h4 class="text-xl font-bold">[Graduação anterior]</h4>
+                            <div class="text-primary font-medium mb-2">[Nome da Instituição] | [Ano de Conclusão]</div>
+                            <p class="text-gray-600">
+                                [Detalhes relevantes]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cursos e Certificações -->
+                <div class="bg-white p-8 rounded-xl shadow-sm reveal">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-certificate text-primary mr-3"></i>
+                        Cursos & Certificações
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">[Certificação mais relevante]</h4>
+                            <div class="text-primary font-medium mb-2">[Instituição] | [Ano]</div>
+                            <p class="text-gray-600">
+                                [Descrição breve do conteúdo e como aplica na sua carreira]
+                            </p>
+                        </div>
+                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">[Curso importante]</h4>
+                            <div class="text-primary font-medium mb-2">[Instituição] | [Ano]</div>
+                            <p class="text-gray-600">
+                                [Habilidades adquiridas e aplicação prática]
+                            </p>
+                        </div>
+                        
+                        <div class="reveal">
+                            <h4 class="text-xl font-bold">[Workshop/Treinamento]</h4>
+                            <div class="text-primary font-medium mb-2">[Instituição] | [Ano]</div>
+                            <p class="text-gray-600">
+                                [Competências desenvolvidas]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-4 text-center reveal">
+                Meu <span class="gradient-text">Portfólio</span>
+            </h2>
+            <p class="text-gray-600 text-center mb-16 max-w-2xl mx-auto reveal">
+                Alguns dos projetos mais relevantes que desenvolvi ao longo da minha carreira.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Projeto 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden reveal card-3d">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <!-- Imagem do projeto ou placeholder -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-6xl text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">[Nome do Projeto 1]</h3>
+                        <p class="text-gray-600 mb-4">[Breve descrição do projeto e seu objetivo]</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 1]</span>
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 2]</span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver detalhes →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden reveal card-3d">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-6xl text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">[Nome do Projeto 2]</h3>
+                        <p class="text-gray-600 mb-4">[Breve descrição do projeto e seu objetivo]</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 1]</span>
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 2]</span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver detalhes →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projeto 3 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden reveal card-3d">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-6xl text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">[Nome do Projeto 3]</h3>
+                        <p class="text-gray-600 mb-4">[Breve descrição do projeto e seu objetivo]</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 1]</span>
+                            <span class="bg-gray-200 px-3 py-1 rounded-full text-sm">[Tecnologia 2]</span>
+                        </div>
+                        <div class="mt-4">
+                            <a href="#" class="text-primary font-medium hover:underline">Ver detalhes →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 reveal">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-primary text-primary rounded-full font-medium hover:bg-primary hover:text-white transition">
+                    Ver todos os projetos
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center reveal">
+                Depoimentos de <span class="gradient-text">Colegas</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-sm reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">[Nome do Colega 1]</h4>
+                            <p class="text-gray-600 text-sm">[Cargo], [Empresa]</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"[Seu nome] é um profissional excepcional que sempre entrega resultados além do esperado. Sua capacidade de [destaque uma qualidade] foi fundamental para o sucesso do projeto [nome do projeto]."</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-sm reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">[Nome do Colega 2]</h4>
+                            <p class="text-gray-600 text-sm">[Cargo], [Empresa]</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Trabalhar com [Seu nome] foi uma experiência enriquecedora. Sua habilidade em [destaque outra qualidade] e seu comprometimento com os resultados fazem dele um profissional diferenciado no mercado."</p>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-sm reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">[Nome do Colega 3]</h4>
+                            <p class="text-gray-600 text-sm">[Cargo], [Empresa]</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Recomendo [Seu nome] sem hesitação. Sua abordagem profissional e capacidade de resolver problemas complexos são impressionantes. Um verdadeiro parceiro estratégico para qualquer equipe."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-primary text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <h2 class="text-4xl font-bold mb-6">
+                        Vamos <span class="text-indigo-200">Conversar</span>
+                    </h2>
+                    <p class="text-blue-100 text-xl mb-8">
+                        Estou disponível para oportunidades de trabalho, parcerias ou simplesmente para trocar ideias sobre [sua área de atuação].
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <a href="mailto:seuemail@proton.me" class="text-blue-100 hover:text-white">seuemail@proton.me</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Telefone</h4>
+                                <a href="tel:+5511999999999" class="text-blue-100 hover:text-white">+55 (11) 99999-9999</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">LinkedIn</h4>
+                                <a href="https://linkedin.com/in/seuperfil" target="_blank" class="text-blue-100 hover:text-white">linkedin.com/in/seuperfil</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">GitHub</h4>
+                                <a href="https://github.com/seuusuario" target="_blank" class="text-blue-100 hover:text-white">github.com/seuusuario</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <div class="bg-white p-8 rounded-xl text-gray-800">
+                        <h3 class="text-2xl font-bold mb-6">Envie uma Mensagem</h3>
+                        
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nome</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Assunto</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-secondary transition">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-xl font-semibold text-white">Seu Nome</a>
+                    <p class="mt-2">Profissional em [Sua Área]</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p>© 2023 Seu Nome. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll reveal
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        window.addEventListener('scroll', reveal);
+        reveal(); // Call on page load
+    </script>
+</body>
+</html>
